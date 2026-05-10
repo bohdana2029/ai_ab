@@ -1,0 +1,68 @@
+<mujoco model="drone">
+
+  <!-- timestep have to be smaller -->
+    <option gravity="0 0 -9.81" timestep="0.0001"/>
+
+    <worldbody>
+      <light pos="0 1 1" dir="0 -1 -1" diffuse="1 1 1"/>
+      <camera name="main_camera" mode="targetbody" target="drone" euler="0 0 0"/>
+
+
+
+    <!-- environment setting -->
+    <!-- track -->
+      <!-- start postion-->
+        <geom type="plane" name="start" pos="0 0 0.2" size="0.8 0.8 1.1" rgba="1 0 0 1"/>
+      <!-- target position -->
+        <geom type="plane" name="target" pos="6 6 0.2" size="0.8 0.8 1.1" rgba="1 0 0 1"/>
+
+    <geom type="box" name="wall_1" pos="10 0 5" size="10 10 0.1" rgba="0 1 1 1" euler="0 90 0" />
+    <geom type="box" name="floor" pos="0 0 0" size="10 10 0.1" rgba="0 0 1 1" />
+    <geom type="box" name="wall_2" pos="-10 0 5" size="10 10 0.1" rgba="0 1 1 1" euler="0 90 0" />
+    <geom type="box" name="wall_3" pos="0 10 5 " size="10 10 0.1" rgba="0 1 1 1" euler="90 0 0" />
+    <geom type="box" name="wall_4" pos="0 -10 5" size="10 10 0.1" rgba="0 1 1 1" euler="90 0 0" />  
+    
+      <!-- environment setting end-->
+
+  <!-- This is the drone body -->
+    <body name="drone" pos="0 0 0.3">
+      <joint name="root" type="free"/>
+      <geom type="box" size="0.25 0.25 0.1" mass="1.1" rgba="1 0.9 1 1"/>
+
+      <!-- arms -->
+      <geom type="box" pos="0.35 0.35 0" size="0.35 0.05 0.05" euler="0 0 45" rgba="0.4 0.4 0.9 1"/>
+      <geom type="box" pos="-0.35 0.35 0" size="0.35 0.05 0.05" euler="0 0 -45" rgba="0.4 0.4 0.9 1"/>
+      <geom type="box" pos="-0.35 -0.35 0" size="0.35 0.05 0.05" euler="0 0 45" rgba="0.4 0.4 0.9 1"/>
+      <geom type="box" pos="0.35 -0.35 0" size="0.35 0.05 0.05" euler="0 0 -45" rgba="0.4 0.4 0.9 1"/>
+
+      <!-- propellers -->
+      <!--1-->
+      <geom type="cylinder" pos="0.6 0.6 0.05" size="0.2 0.005" rgba="1 1 1 1"/>
+      <site name="thrust1" pos="0.6 0.6 0.05"/>
+      <!--2-->
+      <geom type="cylinder" pos="0.6 -0.6 0.05" size="0.2 0.005" rgba="1 0.7 0.7 1"/>
+       <site  name="thrust2" pos="0.6 -0.6 0.05"/>
+       <!--3-->
+      <geom type="cylinder" pos="-0.6 -0.6 0.05" size="0.2 0.005" rgba="1 0 0 1"/>
+      <site  name="thrust3" pos="-0.6 -0.6 0.05"/>
+        <!--4-->
+      <geom type="cylinder" pos="-0.6 0.6 0.05" size="0.2 0.005" rgba="0.5 0 0 1"/>
+      <site  name="thrust4" pos="-0.6 0.6 0.05"/>
+    </body>
+<!-- drone body end-->
+
+
+
+  </worldbody>
+  <actuator>
+    <motor site="thrust1" name="thrust1" gear="0 0 1 0 0 0" ctrlrange="0 200"/>
+    <motor site="thrust2" name="thrust2" gear="0 0 1 0 0 0" ctrlrange="0 200"/>
+    <motor site="thrust3" name="thrust3" gear="0 0 1 0 0 0" ctrlrange="0 200"/>
+    <motor site="thrust4" name="thrust4" gear="0 0 1 0 0 0" ctrlrange="0 200"/>
+  </actuator>
+  <!--
+  <keyframe>
+    <key name="hover" qpos="0 0 0 0 0 0 1 0.5 0.5 0.5"/>
+   </keyframe>
+    -->
+</mujoco>
