@@ -13,4 +13,4 @@ The architecture consists of an 13-value input layer, three hidden layers with R
 
 The environment is designed to be compatible with Gymnasium-based algorithms by following the required environment structure. 
 
-Link to the full report: 
+Link to the full report: https://github.com/bohdana2029/ai_ab/blob/main/ai_ab__roject%20(4).pdf
